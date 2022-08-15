@@ -80,14 +80,14 @@ class FileController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, File $product)
+    public function update(Request $request, File $path)
     {
          request()->validate([
             'name' => 'required',
             'file_path' => 'required',
         ]);
 
-        $product->update($request->all());
+        $path->update($request->all());
 
         return redirect()->route('files.index')
                         ->with('success','Arquivo editado com sucesso');
@@ -96,9 +96,9 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(File $product)
+    public function destroy(File $path)
     {
-        $product->delete();
+        $path->delete();
 
         return redirect()->route('files.index')
                         ->with('success','Arquivo excluido com sucesso');

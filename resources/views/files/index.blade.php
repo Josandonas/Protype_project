@@ -9,7 +9,7 @@
             </div>
             <div class="pull-right">
                 @can('product-create')
-                <a class="btn btn-success" href="{{ route('products.create') }}"> Create New File</a>
+                <a class="btn btn-success" href="{{ route('files.create') }}"> Create New File</a>
                 @endcan
             </div>
         </div>
@@ -30,7 +30,7 @@
             <th>Arquivo</th>
             <th width="280px">Action</th>
         </tr>
-	    @foreach ($products as $product)
+	    @foreach ($files as $file)
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ $product->name }}</td>
