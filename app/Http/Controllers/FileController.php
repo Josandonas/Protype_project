@@ -8,10 +8,10 @@ class FileController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:product-create', ['only' => ['create','store']]);
-         $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:files-list|files-create|files-edit|files-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:files-create', ['only' => ['create','store']]);
+         $this->middleware('permission:files-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:files-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -20,11 +20,11 @@ class FileController extends Controller
      */
     public function index()
     {
-        $products = File::latest()->paginate(5);
-        return view('files.index',compact('products'))
+        $path = File::latest()->paginate(5);
+        return view('files.index',compact('path'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +34,7 @@ class FileController extends Controller
     {
         return view('files.create');
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,32 +47,32 @@ class FileController extends Controller
             'name' => 'required',
             'file_path' => 'required',
         ]);
-    
+
         File::create($request->all());
-    
+
         return redirect()->route('files.index')
-                        ->with('success','Product created successfully.');
+                        ->with('success','Arquivo Salvo.');
     }
-    
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(File $product)
+    public function show(File $path)
     {
-        return view('files.show',compact('product'));
+        return view('files.show',compact('path'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(File $product)
+    public function edit(File $path)
     {
-        return view('files.edit',compact('product'));
+        return view('files.edit',compact('path'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -86,21 +86,21 @@ class FileController extends Controller
             'name' => 'required',
             'file_path' => 'required',
         ]);
-    
+
         $product->update($request->all());
-    
+
         return redirect()->route('files.index')
-                        ->with('success','Product updated successfully');
+                        ->with('success','Arquivo editado com sucesso');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(File $product)
     {
         $product->delete();
-    
+
         return redirect()->route('files.index')
-                        ->with('success','Product deleted successfully');
+                        ->with('success','Arquivo excluido com sucesso');
     }
 }
