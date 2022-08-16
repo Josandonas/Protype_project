@@ -23,7 +23,7 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Permissions:</strong>
+            <strong>Permissões:</strong>
             @if(!empty($rolePermissions))
                 @foreach($rolePermissions as $v)
                     <label class="label label-success">{{ $v->name }},</label>

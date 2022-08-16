@@ -8,8 +8,8 @@
                 <h2>Arquivos</h2>
             </div>
             <div class="pull-right">
-                @can('product-create')
-                <a class="btn btn-success" href="{{ route('files.create') }}"> Create New File</a>
+                @can('file-create')
+                <a class="btn btn-success" href="{{ route('files.create') }}"> Criar novo arquivo</a>
                 @endcan
             </div>
         </div>
@@ -28,25 +28,25 @@
             <th>No</th>
             <th>Name</th>
             <th>Arquivo</th>
-            <th width="280px">Action</th>
+            <th width="280px">Ação</th>
         </tr>
 	    @foreach ($files as $file)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ $product->name }}</td>
-	        <td>{{ $product->detail }}</td>
+	        <td>{{ $file->name }}</td>
+	        <td>{{ $file->file_path }}</td>
 	        <td>
-                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
-                    @can('product-edit')
-                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                <form action="{{ route('files.destroy',$file->id) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('files.show',$file->id) }}">Show</a>
+                    @can('file-edit')
+                    <a class="btn btn-primary" href="{{ route('files.edit',$file->id) }}">Edit</a>
                     @endcan
 
 
                     @csrf
                     @method('DELETE')
-                    @can('product-delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    @can('file-delete')
+                    <button type="submit" class="btn btn-danger">Apagar</button>
                     @endcan
                 </form>
 	        </td>

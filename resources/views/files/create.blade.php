@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Add New File</h2>
+                <h2>Adicionar Novo File</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('files.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('files.index') }}">Voltar</a>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <strong>Opa!</strong> Há um problema com o arquivo que deseja salvar.<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -31,7 +31,7 @@
          <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Name:</strong>
+		            <strong>Nome:</strong>
 		            <input type="text" name="name" class="form-control" placeholder="Name">
 		        </div>
 		    </div>
@@ -40,12 +40,12 @@
 		            <strong>Arquivo:</strong>
 		            <div class="custom-file">
                         <input type="file" name="file_path" class="custom-file-input" id="chooseFile">
-                        <label class="custom-file-label" for="chooseFile">Select file</label>
+                        <label class="custom-file-label" for="chooseFile">Escolher Arquivo</label>
                     </div>
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		            <button type="submit" class="btn btn-primary">Submit</button>
+		            <button type="submit" class="btn btn-primary">Salvar</button>
 		    </div>
 		</div>
     </form>

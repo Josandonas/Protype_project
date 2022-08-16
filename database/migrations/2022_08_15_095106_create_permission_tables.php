@@ -19,23 +19,23 @@ class CreatePermissionTables extends Migration
         $teams = config('permission.teams');
 
         if (empty($tableNames)) {
-            throw new \Exception('Error: config/permission.php not loaded. Run [php artisan config:clear] and try again.');
+            throw new \Exception('Error: config/permission.php not loaded. Execute [php artisan config:clear] e tente novamente.');
         }
         if ($teams && empty($columnNames['team_foreign_key'] ?? null)) {
-            throw new \Exception('Error: team_foreign_key on config/permission.php not loaded. Run [php artisan config:clear] and try again.');
+            throw new \Exception('Error: team_foreign_key on config/permission.php not loaded. Execute [php artisan config:clear] e tente novamente.');
         }
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id'); // permission id
-            $table->string('name');       // For MySQL 8.0 use string('name', 125);
-            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->string('name');       // use string('name', 125);
+            $table->string('guard_name'); // use string('guard_name', 125);
             $table->timestamps();
 
             $table->unique(['name', 'guard_name']);
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
-            $table->bigIncrements('id'); // role id
+            $table->bigIncrements('id'); // permission id
             if ($teams || config('permission.testing')) { // permission.testing is a fix for sqlite testing
                 $table->unsignedBigInteger($columnNames['team_foreign_key'])->nullable();
                 $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
