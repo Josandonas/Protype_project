@@ -8,7 +8,7 @@
                 <h2>Arquivos</h2>
             </div>
             <div class="pull-right">
-                @can('files-create')
+                @can('file-create')
                 <a class="btn btn-success" href="{{ route('files.create') }}"> Criar novo arquivo</a>
                 @endcan
             </div>
@@ -30,7 +30,7 @@
             <th>Arquivo</th>
             <th width="280px">Ação</th>
         </tr>
-	    @foreach ($files as $file)
+	    @foreach ($path as $file)
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ $file->name }}</td>
@@ -38,14 +38,14 @@
 	        <td>
                 <form action="{{ route('files.destroy',$file->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('files.show',$file->id) }}">Show</a>
-                    @can('files-edit')
+                    @can('file-edit')
                     <a class="btn btn-primary" href="{{ route('files.edit',$file->id) }}">Edit</a>
                     @endcan
 
 
                     @csrf
                     @method('DELETE')
-                    @can('files-delete')
+                    @can('file-delete')
                     <button type="submit" class="btn btn-danger">Apagar</button>
                     @endcan
                 </form>
@@ -55,6 +55,6 @@
     </table>
 
 
-    {!! $products->links() !!}
+    {!! $path->links() !!}
 
 @endsection

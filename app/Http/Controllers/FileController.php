@@ -8,10 +8,10 @@ class FileController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:files-list|files-create|files-edit|files-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:files-create', ['only' => ['create','store']]);
-         $this->middleware('permission:files-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:files-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:file-list|file-create|file-edit|file-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:file-create', ['only' => ['create','store']]);
+         $this->middleware('permission:file-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:file-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

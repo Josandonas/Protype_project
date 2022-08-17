@@ -93,7 +93,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
-            'numberCard' =>'min 5| max 30',
+            'numberCard' =>'min:5 | max: 30',
             'dateBorn' => 'date_format:"d-m-Y"|required',
             'password' => 'same:confirm-password',
             'roles' => 'required'
