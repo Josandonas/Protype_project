@@ -39,8 +39,9 @@
 		        <div class="form-group">
 		            <strong>Arquivo:</strong>
 		            <div class="custom-file">
-                        <input type="file" name="file_path" class="custom-file-input" id="chooseFile">
-                        <label class="custom-file-label" for="chooseFile">Escolher Arquivo</label>
+                        <input type="file" name="file" class="custom-file-input" id="chooseFile">
+                        <br>
+                        <label class="custom-file-label" for="chooseFile">Formatos Permitidos: csv,txt,xlx,xls,pdf</label>
                     </div>
 		        </div>
 		    </div>

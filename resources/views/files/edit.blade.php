@@ -41,7 +41,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Arquivo:</strong>
-		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $path->file_path }}</textarea>
+		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $path->file }}</textarea>
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">

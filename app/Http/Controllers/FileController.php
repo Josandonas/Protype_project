@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\File;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+
 class FileController extends Controller
 {
     function __construct()
@@ -45,24 +50,27 @@ class FileController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'file_path' => 'required',
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048',
         ]);
-
-        File::create($request->all());
-
-        return redirect()->route('files.index')
-                        ->with('success','Arquivo Salvo.');
+        $saveFile= new File;
+        if($request->file()) {
+            $fileName = $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+            $saveFile->name = $request->file->getClientOriginalName();
+            $saveFile->file_path = '/storage/' . $filePath;
+            $saveFile->save();
+            return redirect()->route('files.index')->with('success','Arquivo Salvo.');
+        }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(File $path)
-    {
-        return view('files.show',compact('path'));
+    public function down($path){
+        // $terr= Storage::files($path->file_path);
+        $teste = File::where('id',$path)->firstOrFail()->value("name");
+        // $path_local = $teste->file_path;
+        //   dd("$teste");
+        return response()->download(storage_path('app/'.$teste))->
+        redirect()->
+        route('files.index')->
+        with('success','Download Concluído.');
     }
 
     /**
@@ -84,7 +92,7 @@ class FileController extends Controller
     {
          request()->validate([
             'name' => 'required',
-            'file_path' => 'required',
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048',
         ]);
 
         $path->update($request->all());

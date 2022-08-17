@@ -34,16 +34,14 @@
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ $file->name }}</td>
-	        <td>{{ $file->file_path }}</td>
+	        <td>{{ $file->file_path}}</td>
 	        <td>
-                <form action="{{ route('files.destroy',$file->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('files.show',$file->id) }}">Show</a>
+                <form action="{{ route('files.destroy',$file->file_path) }}" method="get">
+                    @csrf
+                    <a class="btn btn-info" href="{{ url('down',$file->id) }}">Baixar</a>
                     @can('file-edit')
                     <a class="btn btn-primary" href="{{ route('files.edit',$file->id) }}">Edit</a>
                     @endcan
-
-
-                    @csrf
                     @method('DELETE')
                     @can('file-delete')
                     <button type="submit" class="btn btn-danger">Apagar</button>
