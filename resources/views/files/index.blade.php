@@ -38,7 +38,7 @@
 	        <td>
                 <form action="{{ route('files.destroy',$file->file_path) }}" method="get">
                     @csrf
-                    <a class="btn btn-info" href="{{ url('down',$file->id) }}">Baixar</a>
+                    <a class="btn btn-info" href="{{ url('download',$file->id) }}">Baixar</a>
                     @can('file-edit')
                     <a class="btn btn-primary" href="{{ route('files.edit',$file->id) }}">Edit</a>
                     @endcan

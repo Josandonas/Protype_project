@@ -29,5 +29,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('files', FileController::class);
-    Route::get('down/{id}',[FileController::class,'down'])->name('down');
+    Route::get('download/{id}',[FileController::class,'download_File'])->name('download');
 });

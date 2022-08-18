@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
-use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 
@@ -62,16 +63,22 @@ class FileController extends Controller
             return redirect()->route('files.index')->with('success','Arquivo Salvo.');
         }
     }
-    public function down($path){
-        // $terr= Storage::files($path->file_path);
-        $teste = File::where('id',$path)->firstOrFail()->value("name");
-        // $path_local = $teste->file_path;
-        //   dd("$teste");
-        //$headers = ['Content-Type' => 'application/pdf'];
-        return response()->download(storage_path('app/'.$teste))->
-        redirect()->
-        route('files.index')->
-        with('success','Download Concluído.');
+
+    /*
+    Download fuction for especific file
+    */
+    public function download_File($path){
+        $nameFile = File::where('id',$path)->firstOrFail();
+        if (file_exists(public_path().'/storage/uploads/'.$nameFile->name)){
+            $headers =[
+                'Content-Type' =>'application/pdf',
+            ];
+            $filePath=public_path().'/storage/uploads/'.$nameFile->name;
+            return response()->download($filePath, $nameFile->name, $headers);
+            // ->with('success','Download Concluído.');
+        };
+        return ['status' => false,
+         'message' => 'Não foi possível gerar o arquivo.'];
     }
 
     /**
