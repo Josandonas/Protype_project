@@ -67,6 +67,7 @@ class FileController extends Controller
         $teste = File::where('id',$path)->firstOrFail()->value("name");
         // $path_local = $teste->file_path;
         //   dd("$teste");
+        //$headers = ['Content-Type' => 'application/pdf'];
         return response()->download(storage_path('app/'.$teste))->
         redirect()->
         route('files.index')->
