@@ -90,11 +90,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data=date("d-m-Y", strtotime($request->dateBorn));
+        $request=$data;
+            // dd($request);
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'numberCard' =>'min:5 | max: 30',
-            'dateBorn' => 'date_format:"d-m-Y"|required',
+            'dateBorn' => 'required | date_format:d-m-Y',
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
@@ -106,7 +109,7 @@ class UserController extends Controller
             $input = Arr::except($input,array('password'));
         }
 
-        $user = User::find($id);
+        $user = User::find($id);                         
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
